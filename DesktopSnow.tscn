@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8rktrswcn217"]
+
+[ext_resource type="Script" path="res://DesktopSnow.cs" id="1_ibhxm"]
+[ext_resource type="Texture2D" uid="uid://bd2wyvlnpjluq" path="res://snowflake.png" id="2_gnbt4"]
+[ext_resource type="ArrayMesh" uid="uid://cyrm1yfwaliom" path="res://snowflake.tres" id="3_fdajn"]
+
+[sub_resource type="Gradient" id="Gradient_oh4ga"]
+offsets = PackedFloat32Array(0, 0.913333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="MultiMesh" id="MultiMesh_tw8px"]
+use_colors = true
+instance_count = 1
+mesh = ExtResource("3_fdajn")
+buffer = PackedFloat32Array(1, 7.02051e-43, -5.00719e-37, 2808, -5.00084e-37, 1, 0, 690, 1, 1, 1, 1)
+
+[node name="DesktopSnow" type="Node2D"]
+script = ExtResource("1_ibhxm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1915.0
+offset_bottom = 1088.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(960, 0)
+amount = 400
+lifetime = 10.0
+texture = ExtResource("2_gnbt4")
+emission_shape = 3
+emission_rect_extents = Vector2(1060, 0)
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+color_ramp = SubResource("Gradient_oh4ga")
+
+[node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource("MultiMesh_tw8px")
+texture = ExtResource("2_gnbt4")
+
+[node name="Snowflake" type="MeshInstance2D" parent="."]
+visible = false
+position = Vector2(77, 50)
+mesh = ExtResource("3_fdajn")
+texture = ExtResource("2_gnbt4")
